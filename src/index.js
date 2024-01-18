@@ -1,15 +1,36 @@
-const http = require("http");
+const express = require("express");
 const dotenv = require("dotenv");
+
+const myMiddleware = require("./middleware");
+// const route = express.Router();
 dotenv.config();
 
-const appInitialController = (req, response) => {
-  response.writeHead(200, { "Content-Type": "text/plain" });
-  response.write("Hello World!");
-  response.end();
-};
+const app = express();
 
-const startLog = () => {
-  console.log(`nodejs running on http://localhost:${process.env.PORT}`);
-};
-const server = http.createServer(appInitialController);
-server.listen(process.env.PORT, startLog);
+//route.use(myMiddleware);
+// app.use("/", route);
+// route.get("/about", (req, res) => {
+//     res.send("About Page");
+//   });
+
+// app.use(myMiddleware);
+
+app.get("/", (req, res) => {
+  res.send("Hello World!");
+});
+
+route.get("/about", (req, res) => {
+  res.send("About Page");
+});
+
+app.get("/contact", (req, res) => {
+  res.send("Contact Page");
+});
+
+app.get("*", (req, res) => {
+  res.send("Page Not Found");
+});
+
+app.listen(process.env.PORT, () => {
+  console.log(`Server is running on port http://localhost:${process.env.PORT}`);
+});
